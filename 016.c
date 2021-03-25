@@ -1,23 +1,26 @@
 #include<stdio.h>
 int main()
 {
-	int A[500];
-	int carry = 0;
-	long long sum = 0;
-	int i,j;
-	for(i=0;i<500;i++)
-		A[i]=0;
-	A[0] = 1;
-	for(i=1;i<=1000;i++) {
+	int a[350];
+	int i,carry,n;
+	a[0]=1;
+	for(i=1;i<350;i++)
+		a[i]=0;
+	n=0;
+	while(n<1000)
+	{
 		carry = 0;
-		for(j=0;j<500;j++) {
-			A[j] = A[j] * 2 + carry;
-			carry = A[j]/10;
-			A[j] = A[j]%10;
+		for(i=0;i<350;i++)
+		{
+			a[i] = 2*a[i]+carry;
+			carry = a[i]/10;
+			a[i] = a[i]%10;
 		}
+		n++;
 	}
-	for(i=0;i<500;i++)
-		sum = sum + A[i];
-	printf("%lld\n", sum);
+	n=0;
+	for(i=349;i>-1;i--)
+		n=n+a[i];
+	printf("%d\n", n);
 	return 0;
 }

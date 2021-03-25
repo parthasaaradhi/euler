@@ -1,48 +1,28 @@
 #include<stdio.h>
 int main()
 {
-	int A[1000];
-	long long ip = 0;
-	int i=0;
-	int j;
-	long long m = 0;
-	char c = '0';
-	for(j=0;j<1000;){
+	int a[1000];
+	char c;
+	int i,j;
+	long long max,p;
+	max = 0;
+	for(i=0;i<1000;i++)
+	{
 		scanf("%c", &c);
-		if ( c > 47 && c < 58) {
-			A[j] = c - 48;
-			j = j + 1;
-		}
+		if(c!='0' && c!='1' && c!='2' && c!='3' && c!='4' && c!='5'
+				&& c!='6' && c!='7' && c!='8' && c!='9')
+			i--;
+		else
+			a[i] = c - '0';
 	}
-	while(i<1000-13) {
-		if (ip == 0) {
-			ip = 1;
-			for(j=i;j<i+13;j++) {
-				if ( A[j] == 0) {
-					i = j + 1;
-					ip = 0;
-					break;
-				} else {
-					ip = ip * A[j];
-				}
-			}
-			if (ip != 0) {
-				printf("%d, %lld\n", i, ip);
-				i = i + 1;
-			}
-		} else {
-			if (A[i+12] == 0) {
-				ip = 0;
-				i = i + 13;
-			} else {
-				ip = ip / A[i-1] * A[i + 12];
-				printf("%d, %lld\n", i, ip);
-				i = i + 1;
-			}
-		}
-		if (m < ip)
-			m = ip;
+	for(i=0;i<1000;i++)
+	{
+		p=1;
+		for(j=0;j<13 && i+j<1000;j++)
+			p=p*a[i+j];
+		if(p>max)
+			max=p;
 	}
-	printf("%lld\n", m);
+	printf("%lld\n", max);
 	return 0;
 }

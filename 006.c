@@ -1,10 +1,8 @@
 #include<stdio.h>
-long long mydiffsq(int n)
-{
-	return (n*(n*n-1)*(3*n+2))/12;
-}
+#define sigma_n2(n) n*(n+1)*(2*n+1)/6
+#define sigma_n(n) n*(n+1)/2
 int main()
 {
-	printf("%lld, %lld\n", mydiffsq(10), mydiffsq(100));
+	printf("%d\n", sigma_n(100)*sigma_n(100) - sigma_n2(100));
 	return 0;
 }

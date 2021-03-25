@@ -1,34 +1,31 @@
 #include<stdio.h>
 int main()
 {
-	int A[1000];
-	int B[1000];
-	int C[1000];
-	int i,c;
-	long long n;
-	for(i=999;i>0;i--)
-	{
-		A[i] = 0;
-		B[i] = 0;
-		C[i] = 0;
-	}
-	A[0] = 1;
-	B[0] = 1;
-	C[0] = 0;
+	int temp[1000];
+	int prev[1000];
+	int next[1000];
+	int i,carry,n;
+	for(i=0;i<1000;i++)
+		prev[i] = next[i] = 0;
+	prev[999] = next[999] = 1;
 	n = 2;
-	while(A[999] == 0) {
-		c = 0;
-		for(i=0;i<1000;i++)
-			C[i] = A[i];
-		for(i=0;i<1000;i++) {
-			A[i] = A[i] + B[i] + c;
-			c = A[i]/10;
-			A[i] = A[i]%10;
-		}
-		for(i=0;i<1000;i++)
-			B[i] = C[i];
+	while(next[0] == 0)
+	{
 		n++;
+		carry = 0;
+		for(i=999;i>=0;i--)
+			temp[i]=next[i];
+		for(i=999;i>=0;i--)
+		{
+			next[i] = (carry+temp[i]+prev[i])%10;
+			carry = (carry+temp[i]+prev[i])/10;
+		}
+		for(i=999;i>=0;i--)
+			prev[i]=temp[i];
+		/*for(i=0;i<1000;i++)
+			printf("%d", next[i]);
+		printf("\n");*/
 	}
-	printf("%lld\n", n);
+	printf("%d\n", n);
 	return 0;
 }

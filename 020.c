@@ -1,22 +1,27 @@
 #include<stdio.h>
 int main()
 {
-	int A[200];
-	int i,j,carry;
-	for(i=0;i<200;i++)
-		A[i] = 0;
-	A[0] = 1;
-	for(j=2;j<100;j++) {
-		carry = 0;
-		for(i=0;i<200;i++) {
-			A[i] = A[i] * j + carry;
-			carry = A[i]/10;
-			A[i] = A[i]%10;
+	int a[500];
+	int i,n,carry;
+	for(i=0;i<500;i++)
+		a[i]=0;
+	a[499]=1;
+	n=1;
+	while(n<101)
+	{
+		carry=0;
+		for(i=499;i>-1;i--)
+		{
+			a[i] = a[i]*n+carry;
+			carry=a[i]/10;
+			a[i] = a[i]%10;
 		}
+		n++;
 	}
-	carry = 0;
-	for(i=0;i<200;i++)
-		carry = carry + A[i];
+	carry=0;
+	for(i=499;i>-1;i--)
+		carry = carry + a[i];
+		//printf("%d",a[i]);
 	printf("%d\n", carry);
 	return 0;
 }

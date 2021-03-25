@@ -1,27 +1,27 @@
 #include<stdio.h>
 int main()
 {
-	long long myprimes[10001];
-	myprimes[0] = 2;
-	long long num = 3;
-	int x = 0;
-	int i;
-
-	while(x != 10000)
+	int sqrt_now = 1;
+	int n=2;
+	int i,j;
+	int count_primes=0;
+	while(count_primes!=10000+1)
 	{
-		i = 0;
-		while(i<=x)
+		j=0;
+		if(n == (sqrt_now+1)*(sqrt_now+1))
 		{
-			if (num % myprimes[i] == 0) {
-				num = num + 1;
-				i = 0;
-			} else {
-				i = i + 1 ;
-			}
+			sqrt_now++;
+			j=1;
 		}
-		myprimes[x+1] = num;
-		x = x + 1;
+		for(i=2;i<=sqrt_now&&j==0;i++)
+		{
+			if(n%i==0)
+				j=1;
+		}
+		if(j==0)
+			count_primes++;
+		n++;
 	}
-	printf("%lld, %lld\n", myprimes[5], myprimes[10000]);
+	printf("%d\n", n-1);
 	return 0;
 }

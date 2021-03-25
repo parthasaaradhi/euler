@@ -1,19 +1,33 @@
 #include<stdio.h>
+int sum_of_divisors(int n, int sq)
+{
+	int i;int s;
+	s=1;
+	for(i=2;i<sq;i++)
+		if(n%i==0)
+			s = s + i + n/i;
+	if(n==sq*sq)
+		s=s+sq;
+	return s;
+}
+
 int main()
 {
-	long long S[10000];
-	long long i,j;
-	for(i=0;i<10000;i++)
-		S[i] = 1;
-	for(i=2;i<10000;i++)
-		for(j=2*i;j<10001;j=j+i)
-			S[j] = S[j] + i;
-	j=0;
-	for(i=2;i<10000;i++)
-		if(S[i] < 10000 && S[i] != i && S[S[i]] == i) {
-			printf("%lld ", i);
-			j=j+i;
-		}
-	printf("\n%lld\n", j);
+	int a[10000+1];
+	int n,sq;
+	sq=1;
+	a[0]=0;
+	a[1]=1;
+	for(n=2;n<10000+1;n++)
+	{
+		if(n == (sq+1)*(sq+1))
+			sq++;
+		a[n] = sum_of_divisors(n, sq);
+	}
+	sq=0;
+	for(n=2;n<10000+1;n++)
+		if(a[n]<10000+1 && n!=a[n] && a[a[n]] == n)
+			sq+=n;
+	printf("%d\n", sq);
 	return 0;
 }

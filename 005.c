@@ -1,20 +1,23 @@
 #include<stdio.h>
-int main()
+int lcm(int* p,int n)
 {
-	long long A[21];
-	long long x,y;
-	long long ans = 1;
-	for(x = 0; x < 21 ; x++) {
-		A[x] = x;
-	}
-	for(x = 2; x < 21; x++) {
-		ans = ans * A[x];
-		for(y = x + 1; y < 21; y++) {
-			if (A[y] % A[x] == 0) {
-				A[y] = A[y] / A[x];
-			}
+	int lcm = 1;
+	int i,j;
+	for(i=0;i<n;i++)
+	{
+		lcm = lcm * p[i];
+		for(j=i+1;j<n;j++)
+		{
+			if(p[j]%p[i]==0)
+				p[j]=p[j]/p[i];
 		}
 	}
-	printf("%lld\n", ans);
-	return 0;
+	return lcm;
+}
+int main()
+{
+	int a[20],i;
+	for(i=0;i<20;i++)
+		a[i]=i+1;
+	printf("%d\n", lcm(a, 20));
 }

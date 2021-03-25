@@ -1,31 +1,29 @@
 #include<stdio.h>
-int mypalindrome(int num)
+int is_palindrome(int n)
 {
-	int x = 0;
-	int n = num;
-	while(n != 0) {
-		x = 10*x + n%10;
-		n = n/10;
+	int x,y;
+	x=0;
+	y=n;
+	while(y!=0){
+		x=10*x+y%10;
+		y=y/10;
 	}
-	return num == x;
+	if(x==n)
+		return 0;//true
+	else
+		return 1;//false
+
 }
+
 int main()
 {
-	int x = 100;
-	int y = 100;
-	int ans = 0;
-	int l = 0;
-	for(x = 100; x < 1000; x++)
-	{
-		for(y = x ; y < 1000; y++)
-		{
-			l = x*y;
-			if (mypalindrome(l) && ans < l)
-			{
-				ans = l;
-			}
-		}
-	}
-	printf("%d\n", ans);
+	int i,j,max;
+	max = 0;
+	for(i=100;i<1000;i++)
+		for(j=i;j<1000;j++)
+			if(is_palindrome(i*j) == 0)
+				if(i*j>max)
+					max=i*j;
+	printf("%d\n", max);
 	return 0;
 }

@@ -1,47 +1,24 @@
 #include<stdio.h>
+int is_prime(int i, int sqrt_now)
+{
+	int j;
+	for(j=2;j<=sqrt_now;j++)
+		if(i%j==0)
+			return 1;
+	return 0;
+}
 int main()
 {
-	long long myprimes[1000000];
-	long long digits[30];
-	int x = 1;
-	int i,j;
-	myprimes[0] = 2;
-	myprimes[1] = 3;
-	long long n = 5;
-	long long carry = 5;
-	long long N = 2 * 1000 * 1000;
-	digits[0] = 5;
-	for(j=1;j<30;j++) {
-		digits[j] = 0;
+	long long s = 0;
+	int i;
+	int sqrt_now  = 1;
+	for(i=2;i<2*1000*1000;i++)
+	{
+		if(i == (sqrt_now+1)*(sqrt_now+1))
+			sqrt_now++;
+		else
+			s = s + (1-is_prime(i, sqrt_now))*i;
 	}
-	while(n <= N) {
-		while(i<=x && n <= N) {
-			if(n%myprimes[i] == 0) {
-				n = n + 2;
-				i = 1;
-			} else {
-				i = i + 1;
-			}
-		}
-		if ( n <= N ) {
-			myprimes[x+1] = n;
-			carry = carry + n;
-			/*
-			while(carry != 0) {
-				digits[j] = (digits[j] + carry)%10;
-				carry = (digits[j] + carry)/10;
-				printf("%d\n", digits[j]);
-				j = j + 1;
-			}*/
-			n = n + 2;
-			x = x + 1;
-			i = 1;
-		}
-	}
-	printf("%d\n", x);
-	/*
-	for(j=29;j>=0;j--)
-		printf("%lld", digits[j]);*/
-	printf("%lld\n", carry);
+	printf("%lld\n", s);
 	return 0;
 }

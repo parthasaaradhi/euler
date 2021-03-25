@@ -1,18 +1,16 @@
 #include<stdio.h>
 int main()
 {
-	long long N = 4 * 1000 * 1000;
-	long long x = 1;
-	long long y = 1;
-	long long temp;
-	int z = 0;
-	// Here x = f(3*n+5), where f(3n+2) is the last even number less than N.
-	while(x < N || (z+2)%3 != 0) {
-		temp = x;
-		x = x + y;
-		y = temp;
-		z = z + 1;
+	long long N=4*1000*1000;
+	long long sum=0;
+	long long temp,first,second;
+	first = 1; second = 2;
+	while(second<=N) {
+		sum = sum + (1-second%2)*second;
+		temp = second;
+		second = first + second;
+		first = temp;
 	}
-	printf("%lld\n", (y-1)/2);
+	printf("%lld\n", sum);
 	return 0;
 }
