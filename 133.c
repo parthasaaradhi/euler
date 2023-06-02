@@ -18,7 +18,7 @@ int only_two_and_five(int n) {
 }
 int main() {
 	int seive[limit];
-	int i,j,sum;;
+	int i,j,sum;
 	sum=0;
 	for(i=0;i<limit;i++) seive[i]=0;
 	for(i=2;i<317;i++)
